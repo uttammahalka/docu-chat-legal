@@ -6,6 +6,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/components/ui/use-toast";
 import { Send, Paperclip, User, Bot } from "lucide-react";
+import { fetchChatGPTReply } from '../chatgpt';
+
 
 interface Message {
   id: string;
@@ -52,21 +54,26 @@ export const ChatInterface = ({ chatId, onNewChat }: ChatInterfaceProps) => {
     setIsLoading(true);
 
     // Simulate AI response - replace with actual API call
-    setTimeout(() => {
-      const aiResponse: Message = {
-        id: (Date.now() + 1).toString(),
-        role: "assistant",
-        content: `Based on your question "${userMessage.content}", here's a legal analysis: This appears to be related to contract law principles. I recommend reviewing relevant statutes and case law. Please consult with a qualified attorney for specific legal advice.`,
-        timestamp: new Date(),
-        sources: [
-          "Civil Code Section 1550",
-          "Restatement of Contracts § 17",
-          "Case: Smith v. Jones (2020)"
-        ]
-      };
-      setMessages(prev => [...prev, aiResponse]);
-      setIsLoading(false);
-    }, 2000);
+    try {
+  const reply = await fetchChatGPTReply(userMessage.content);
+  const aiResponse: Message = {
+    id: (Date.now() + 1).toString(),
+    role: "assistant",
+    content: reply.content || "I'm sorry, I couldn't generate a response.",
+    timestamp: new Date(),
+    sources: reply.sources || []
+  };
+  setMessages(prev => [...prev, aiResponse]);
+} catch (error) {
+  console.error("Error fetching AI response:", error);
+  toast({
+    title: "Error",
+    description: "Failed to get response from AI.",
+    variant: "destructive",
+  });
+} finally {
+  setIsLoading(false);
+}
   };
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
