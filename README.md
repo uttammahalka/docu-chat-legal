@@ -1,73 +1,240 @@
-# Welcome to your Lovable project
+Harv-E
+Your AI-legal Assistant
 
-## Project info
+AI Legal Assistant
+A comprehensive AI-powered legal document analysis and consultation platform that helps users understand legal documents, get expert advice, and manage their legal queries efficiently.
 
-**URL**: https://lovable.dev/projects/5380c6f3-4858-4571-84db-2e92baf75ee3
+🌟 Features
+🔐 User Authentication
+Secure user registration and login
+JWT-based authentication
+User profile management
+Password change functionality
+💬 AI-Powered Chat Interface
+Natural language legal consultation
+Document analysis in chat context
+Clause comparison functionality
+Chat history and session management
+Real-time AI responses with legal references
+📄 Document Analysis
+PDF Document Processing: Extract and analyze text from PDF files
+Image OCR: Extract text from legal document images
+Multi-format Support: PDF, JPG, PNG, GIF, BMP, TIFF
+Intelligent Analysis:
+Document type classification
+Key clause identification
+Risk assessment
+Party identification
+Date and monetary value extraction
+Legal reference suggestions
+🎯 Key Capabilities
+Contract Analysis: Identify risks, obligations, and key terms
+Legal Notice Review: Understand implications and deadlines
+Agreement Comparison: Compare different legal documents
+Risk Assessment: Get risk levels and recommendations
+Government References: Links to official legal resources
+📊 Dashboard & Analytics
+User activity overview
+Document statistics
+Chat session management
+Recent activity tracking
+Search functionality
+🚀 Tech Stack
+Backend
+Node.js with Express.js
+MongoDB with Mongoose ODM
+OpenAI GPT-4 for AI analysis
+JWT for authentication
+Multer for file uploads
+PDF-parse for PDF processing
+Tesseract.js for OCR
+Frontend
+React 18 with functional components
+React Router for navigation
+React Query for data fetching
+Tailwind CSS for styling
+React Hook Form with Zod validation
+Lucide React for icons
+React Hot Toast for notifications
+📋 Prerequisites
+Node.js (v16 or higher)
+MongoDB (local or cloud instance)
+OpenAI API key
+npm or yarn package manager
+🛠️ Installation
+1. Clone the Repository
+git clone <repository-url>
+cd ai-legal-assistant
+2. Install Dependencies
+# Install root dependencies
+npm install
 
-## How can I edit this code?
+# Install server dependencies
+cd server
+npm install
 
-There are several ways of editing your application.
+# Install client dependencies
+cd ../client
+npm install
+3. Environment Configuration
+Backend (.env file in server directory)
+cd server
+cp env.example .env
+Edit the .env file with your configuration:
 
-**Use Lovable**
+# Server Configuration
+PORT=5000
+NODE_ENV=development
+CLIENT_URL=http://localhost:3000
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/5380c6f3-4858-4571-84db-2e92baf75ee3) and start prompting.
+# Database Configuration
+MONGODB_URI=mongodb://localhost:27017/ai-legal-assistant
 
-Changes made via Lovable will be committed automatically to this repo.
+# JWT Configuration
+JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
 
-**Use your preferred IDE**
+# OpenAI Configuration
+OPENAI_API_KEY=your-openai-api-key-here
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+# File Upload Configuration
+MAX_FILE_SIZE=10485760
+UPLOAD_PATH=uploads
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+# Security Configuration
+CORS_ORIGIN=http://localhost:3000
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX_REQUESTS=100
+Frontend (.env file in client directory)
+cd client
+Create .env file:
 
-Follow these steps:
+REACT_APP_API_URL=http://localhost:5000/api
+4. Database Setup
+Make sure MongoDB is running on your system or use a cloud MongoDB instance.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+5. OpenAI API Key
+Get your OpenAI API key from OpenAI Platform and add it to the server .env file.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+🚀 Running the Application
+Development Mode
+# From the root directory
 npm run dev
-```
+This will start both the backend server (port 5000) and frontend client (port 3000) concurrently.
 
-**Edit a file directly in GitHub**
+Production Mode
+# Build the frontend
+cd client
+npm run build
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+# Start the server
+cd ../server
+npm start
+📱 Usage Guide
+1. User Registration/Login
+Visit the application and create a new account
+Log in with your credentials
+Access the dashboard
+2. Starting a Chat Session
+Click "Start New Chat" from the dashboard
+Choose a topic and title for your chat
+Begin asking legal questions or upload documents
+3. Document Analysis
+Upload PDF or image files
+Select document type (contract, notice, agreement, etc.)
+Get AI-powered analysis with:
+Document summary
+Risk assessment
+Key clauses identification
+Recommendations
+Legal references
+4. Chat Features
+Ask legal questions in natural language
+Upload documents during chat
+Compare legal clauses
+Save and revisit chat sessions
+Get government website references
+5. Document Management
+View all uploaded documents
+Search through documents
+Reanalyze documents
+Compare multiple documents
+Export analysis results
+🔧 API Endpoints
+Authentication
+POST /api/auth/register - User registration
+POST /api/auth/login - User login
+GET /api/auth/me - Get user profile
+PUT /api/auth/profile - Update profile
+POST /api/auth/change-password - Change password
+Chat Management
+GET /api/chat - Get user's chat sessions
+POST /api/chat - Create new chat session
+GET /api/chat/:id - Get specific chat
+POST /api/chat/:id/message - Send message
+POST /api/chat/:id/analyze-document - Analyze document in chat
+POST /api/chat/:id/compare-clauses - Compare clauses
+Document Management
+POST /api/documents/upload - Upload document
+GET /api/documents - Get user's documents
+GET /api/documents/:id - Get specific document
+POST /api/documents/:id/reanalyze - Reanalyze document
+DELETE /api/documents/:id - Delete document
+POST /api/documents/compare - Compare documents
+User Management
+GET /api/users/profile - Get user profile with stats
+GET /api/users/dashboard - Get dashboard data
+GET /api/users/search - Search chats and documents
+GET /api/users/analytics - Get user analytics
+🔒 Security Features
+JWT-based authentication
+Password hashing with bcrypt
+Rate limiting
+CORS protection
+Input validation
+File upload restrictions
+Helmet.js security headers
+📊 Database Schema
+User Model
+Basic user information
+Authentication details
+Preferences and settings
+Activity tracking
+Chat Model
+Chat sessions
+Messages with metadata
+Document analysis results
+Legal references
+Tags and categorization
+Document Model
+File information
+Analysis results
+Risk assessments
+Processing status
+Metadata and timestamps
+🤝 Contributing
+Fork the repository
+Create a feature branch
+Make your changes
+Add tests if applicable
+Submit a pull request
+📄 License
+This project is licensed under the MIT License.
 
-**Use GitHub Codespaces**
+🆘 Support
+For support and questions:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Create an issue in the repository
+Check the documentation
+Review the API endpoints
+🔮 Future Enhancements
+Email notifications
+Document templates
+Advanced analytics
+Multi-language support
+Mobile application
+Integration with legal databases
+Real-time collaboration features
+⚠️ Disclaimer
+This AI Legal Assistant provides general legal information and document analysis. It is not a substitute for professional legal advice. Always consult with qualified legal professionals for specific legal matters.
 
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/5380c6f3-4858-4571-84db-2e92baf75ee3) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Built with ❤️ for the legal community
