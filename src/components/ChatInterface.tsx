@@ -55,7 +55,9 @@ export const ChatInterface = ({ chatId, onNewChat }: ChatInterfaceProps) => {
 
     // Simulate AI response - replace with actual API call
     try {
-  const reply = await fetchChatGPTReply(userMessage.content);
+  const reply = await fetchChatGPTReply([
+  { role: "user", content: userMessage.content }
+]);
   const aiResponse: Message = {
     id: (Date.now() + 1).toString(),
     role: "assistant",
